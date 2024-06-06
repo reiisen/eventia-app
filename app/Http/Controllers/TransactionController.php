@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Ticket;
+use App\Models\TicketCategory;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,12 +29,17 @@ class TransactionController extends Controller
         $transaction->user()->associate($user)->save();
         $transaction->ticket()->associate($ticket)->save();
 
+        $items = [];
 
-        $transaction->items()->attach([
-            $transactionData['category']
-        ]);
+        foreach ($transactionData['category'] as $id) {
+            array_push($items, TicketCategory::find($id));
+        }
 
-        $transaction->items()->syncWithPivotValues($transactionData['category'], ['qty' => $transactionData['quantity']]);
+        $transaction->items()->attach($items);
+
+        for ($i = 0; $i < count($transactionData['category']); $i++) {
+            $transaction->item()->syncWithPivotValues($transactionData['category'][$i], ['qty' => $transactionData['quantity'][$i]]);
+        }
 
         return redirect('/payment');
     }

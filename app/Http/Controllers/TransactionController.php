@@ -29,12 +29,11 @@ class TransactionController extends Controller
         $transaction->ticket()->associate($ticket)->save();
 
 
-        for ($i = 0; $i < count($transactionData['category']); $i++) {
-            $transaction->items()->attach([
-                $transactionData['category'][$i]
-            ]);
-            $transaction->items()->syncWithPivotValues($transactionData['category'][$i], ['qty' => $transactionData['quantity'][$i]]);
-        }
+        $transaction->items()->attach([
+            $transactionData['category']
+        ]);
+
+        $transaction->items()->syncWithPivotValues($transactionData['category'], ['qty' => $transactionData['quantity']]);
 
         return redirect('/payment');
     }

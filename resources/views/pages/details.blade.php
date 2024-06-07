@@ -7,6 +7,9 @@
             aloha! this is the details page! <br>
             <input type="hidden" name="ticket_id" value="{{ $details->id }}">
             {{ $details->name }} <br>
+            desc <br>
+            {{ $details->description }} <br>
+            Tanggal: {{ $details->date }} <br>
             categories: <br>
             @foreach ($details->categories as $category)
                 <input type="hidden" name="category[]" value="{{ $category->id }}">

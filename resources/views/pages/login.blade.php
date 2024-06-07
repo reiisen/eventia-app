@@ -8,8 +8,6 @@
             <input type="password" name="password" placeholder="Password" required>
             <button type="submit">Login</button>
         </form>
-        <div class='bg-green-200 flex-1'>
-
-        </div>
+        <div class='bg-green-200 flex-1'></div>
     </div>
 @endsection

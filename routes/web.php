@@ -26,9 +26,9 @@ Route::get('/inventory', [TransactionController::class, 'showUserTransactions'])
 
 Route::get('/transaction/{transaction}', [TransactionController::class, 'showTransactionDetails']);
 
-Route::get('/payment', function () {
-    return view('pages.payment');
-});
+Route::post('/pay/{transaction}', [TransactionController::class, 'pay']);
+
+Route::get('payment/{transaction}', [TransactionController::class, 'redirectPayment']);
 
 Route::get('/login', function () {
     return view('pages.login');

@@ -38,7 +38,7 @@ class TransactionController extends Controller
             }
         }
 
-        return redirect('/payment');
+        return redirect('/payment/' . $transaction->id);
     }
 
     public function showUserTransactions()
@@ -49,17 +49,23 @@ class TransactionController extends Controller
 
     public function showTransactionDetails(Transaction $transaction)
     {
-        $details = $transaction->load('items');
+        $details = $transaction->load('items', 'ticket');
         return view('pages.inventoryDetails', compact('details'));
     }
 
     public function redirectPayment(Transaction $transaction)
     {
+        return view('pages.payment', compact('transaction'));
     }
 
-    public function pay(Request $request)
+    public function pay(Transaction $transaction, Request $request)
     {
-        $request->validate();
-        return view('payment_success');
+        $method = $request->validate([
+            'payment_method' => ['required', 'string']
+        ]);
+        $transaction->status = 'completed';
+        $transaction->method = $method['payment_method'];
+        $transaction->save();
+        return view('pages.screens.successfulPayment');
     }
 }

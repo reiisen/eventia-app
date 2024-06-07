@@ -8,6 +8,9 @@
                 <a>ID: {{ $transaction->id }}</a>
                 <a href="{{ url('/transaction/' . $transaction->id) }}">Ticket: {{ $transaction->ticket->name }}</a>
                 <a>Status: {{ $transaction->status }}</a>
+                @if ($transaction->status != 'completed')
+                    <a href='payment/{{$transaction->id}}'>Bayar</a>
+                @endif
             </div>
         @empty
             <p>No transactions found.</p>

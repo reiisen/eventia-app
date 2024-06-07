@@ -6,7 +6,7 @@
     <a href="/login">Login</a>
     @endguest
     @auth
-    <a href={{ url('', []) }}>Inventory</a>
+    <a href='/inventory'>Inventory</a>
     <a href="/auth/logout">Logout</a>
     @endauth
     </div>

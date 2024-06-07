@@ -17,8 +17,7 @@ return new class extends Migration
             $table->foreign('transaction_id')->references('id')->on('transactions');
             $table->unsignedBigInteger('ticket_category_id');
             $table->foreign('ticket_category_id')->references('id')->on('ticket_categories');
-            $table->integer('qty')->nullable();
-            $table->timestamps();
+            $table->integer('qty');
         });
     }
 

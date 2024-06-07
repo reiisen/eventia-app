@@ -10,8 +10,6 @@
             <input type="password" name="password" placeholder="Password" required>
             <button type="submit">Register</button>
         </form>
-        <div class='flex-1 bg-red-200'>
-
-        </div>
+        <div class='flex-1 bg-red-200' />
     </div>
 @endsection

@@ -24,6 +24,6 @@ class TicketCategory extends Model
 
     public function transactions(): BelongsToMany
     {
-        return $this->belongsToMany(Transaction::class, 'transaction_items')->withPivot('stock');
+        return $this->belongsToMany(Transaction::class, 'transaction_items')->withPivot('qty');
     }
 }

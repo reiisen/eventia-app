@@ -22,6 +22,10 @@ Route::get('/auth/logout', [AuthController::class, 'logout']);
 
 Route::post('/checkout', [TransactionController::class, 'checkout']);
 
+Route::get('/inventory', [TransactionController::class, 'showUserTransactions']);
+
+Route::get('/transaction/{transaction}', [TransactionController::class, 'showTransactionDetails']);
+
 Route::get('/payment', function () {
     return view('pages.payment');
 });
@@ -32,8 +36,4 @@ Route::get('/login', function () {
 
 Route::get('/register', function () {
     return view('pages.register');
-});
-
-Route::get('/inventory', function () {
-    return view('pages.inventory');
 });
